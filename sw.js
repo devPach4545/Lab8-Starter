@@ -43,7 +43,25 @@ self.addEventListener('fetch', function (event) {
   /*******************************/
   // B7. TODO - Respond to the event by opening the cache using the name we gave
   //            above (CACHE_NAME)
-  caches.open(CACHE_NAME).then(function(cache){
+  event.respondWith(caches.open(CACHE_NAME).then((cache) =>{
+    // B8. TODO - If the request is in the cache, return with the cached version.
+  //            Otherwise fetch the resource, add it to the cache, and return
+  //            network response.
+  if(event.request in cache){
+    return cache;
+  }
+  else{
+    return fetch(event.request).then((fetchResponse) => {
+      cache.put(event.request, fetchResponse.clone());
+      return fetchResponse;
+    });
+  }
+  }));
+  
+});
+
+/**
+ * return caches.open(CACHE_NAME).then(function(cache){
     // B8. TODO - If the request is in the cache, return with the cached version.
   //            Otherwise fetch the resource, add it to the cache, and return
   //            network response.
@@ -57,6 +75,4 @@ self.addEventListener('fetch', function (event) {
       return response
     });
   }
-  });
-  
-});
+ */
