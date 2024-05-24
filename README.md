@@ -2,6 +2,7 @@
 Dhaivat Pachchigar
 Andrew Smithwick
 
+[Link to the github pages](https://devpach4545.github.io/Lab8-Starter/)
 
 TODO:
 
